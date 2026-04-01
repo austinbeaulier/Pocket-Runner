@@ -1,6 +1,6 @@
 # 🏃 Pocket Runner
 
-> Turn your iPhone into a motion tracker for PC VR and desktop gaming — jog in place in the real world to move your character forward in-game.
+> Turn your iPhone into a motion tracker for PC desktop gaming — jog in place in the real world to move your character forward in-game.
 
 ---
 
