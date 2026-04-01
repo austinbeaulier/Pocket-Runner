@@ -1,67 +1,95 @@
-Pocket Runner: User Guide & Installation
+# 🏃 Pocket Runner
 
-What is Pocket Runner?
+> Turn your iPhone into a motion tracker for PC VR and desktop gaming — jog in place in the real world to move your character forward in-game.
 
-Pocket Runner is an app that turns your iPhone into a motion tracker for PC VR and desktop gaming. By running or jogging in place in the real world, you move your character forward in your game!
-To make this work, you need two things:
-The Pocket Runner app on your iPhone.
-The Pocket Runner PC Server running on your Windows computer.
-💻 Windows Installation Instructions
+---
 
-Step 1: Download and Run the PC Server
+## How It Works
 
-Download the PocketRunnerServer.exe file to your Windows PC.
-Double-click PocketRunnerServer.exe to launch it.
-A console window will open showing that the server is running and broadcasting your PC's connection info.
-Step 2: Allow Network Permissions (Important!)
+Pocket Runner has two components that work together over your local Wi-Fi network:
 
-When you run the server for the first time, Windows Firewall may pop up asking for network permissions.
-You must click "Allow" so that your iPhone can find and talk to your PC over your local Wi-Fi network.
-Step 3: (Highly Recommended for VR) Install Virtual Gamepad Drivers
+| Component | What It Does |
+|---|---|
+| **Pocket Runner** (iPhone app) | Tracks your motion using the phone's sensors |
+| **Pocket Runner PC Server** (Windows) | Receives motion data and translates it into in-game movement |
 
-By default, Pocket Runner simulates pressing the W/A/S/D keys on your keyboard to move you forward.
-If you want smooth, analog joystick movement (which is highly recommended for SteamVR and most modern games), you should install the ViGEmBus driver. Once installed, Pocket Runner will automatically detect it and output virtual Xbox controller movements instead of keyboard presses!
-Download the driver here: ViGEmBus Releases (Download and run the latest installer).
-📱 How to Use the App
+---
 
-Make sure your PC and your iPhone are connected to the same Wi-Fi network.
-Launch the PocketRunnerServer.exe on your PC and leave the window open.
-Open the Pocket Runner app on your iPhone.
-Your PC's name should automatically appear in the app. Tap your PC name to connect.
-Put your phone in your pocket (or strap it to your leg/waist).
-Jog in place to start moving in your game!
+## 💻 Windows Installation
 
-Running from Python Source (Advanced / Developer Setup)
+### Option 1 — Pre-built Executable (Recommended)
 
-If you prefer to run the Pocket Runner server directly from the source code instead of using the pre-built .exe, follow these steps:
-Step 1: Install Python
+**Step 1: Download & launch the server**
 
-You will need Python installed on your Windows PC.
-Go to the official Python website (python.org) and download the latest installer (Python 3.8 or newer is recommended).
-Run the installer.
-CRITICAL: Before clicking "Install Now" at the bottom of the window, make sure to check the box that says "Add python.exe to PATH". If you miss this, the commands in the next steps won't work!
-Step 2: Download the Server Script
+Download `PocketRunnerServer.exe` and double-click it to run. A console window will open confirming the server is running and broadcasting your PC's connection info.
 
-Download the windows_companion.py file to a folder on your computer (for example, inside a new folder on your Desktop called "PocketRunner").
-Step 3: Install Required Libraries
+**Step 2: Allow network permissions**
 
-The server relies on a few Python libraries to handle network connections, virtual controllers, and keyboard inputs.
-Open the Windows Start Menu, type cmd, and press Enter to open the Command Prompt.
-Run the following command exactly as written and press Enter:
-Copy
+On first launch, Windows Firewall will ask for network access. **Click "Allow"** — this is required for your iPhone to communicate with your PC over Wi-Fi.
+
+**Step 3: Install virtual gamepad drivers *(highly recommended for VR)***
+
+By default, Pocket Runner simulates `W`/`A`/`S`/`D` keypresses. For smooth, analog joystick movement (strongly recommended for SteamVR and most modern games), install the **ViGEmBus** driver:
+
+👉 [Download ViGEmBus](https://github.com/nefarius/ViGEmBus/releases) — run the latest installer.
+
+Once installed, Pocket Runner will automatically detect it and switch to virtual Xbox controller output.
+
+---
+
+### Option 2 — Run from Python Source *(Advanced / Developer)*
+
+**Step 1: Install Python**
+
+Download and install **Python 3.8+** from [python.org](https://python.org).
+
+> ⚠️ **Important:** During installation, check **"Add python.exe to PATH"** before clicking Install. Missing this will cause the commands below to fail.
+
+**Step 2: Download the server script**
+
+Download `windows_companion.py` into a folder on your PC (e.g., `Desktop\PocketRunner`).
+
+**Step 3: Install required libraries**
+
+Open **Command Prompt** and run:
+
+```bash
 pip install websockets pynput zeroconf vgamepad
-Wait for the installation to finish successfully.
-Step 4: Run the Server
+```
 
-In your Command Prompt, navigate to the folder where you saved the script. (For example, if it's on your desktop, type cd Desktop\PocketRunner).
-Run the script with this command:
-Copy
+**Step 4: Start the server**
+
+Navigate to the folder containing the script and run it:
+
+```bash
+cd Desktop\PocketRunner
 python windows_companion.py
-The server will start up and begin broadcasting your PC's connection info so your iPhone can find it.
-Note: The first time you run this, Windows Firewall may pop up. Make sure to click Allow so your phone can connect over your local Wi-Fi!
-Step 5: (Highly Recommended for VR) Install Virtual Gamepad Drivers
+```
 
-By default, the script simulates pressing the W/A/S/D keys on your keyboard. For smooth, analog joystick movement in SteamVR and modern games, you need to install the ViGEmBus driver.
-Download the driver here: ViGEmBus Releases (Download and run the latest installer).
-Once installed, the Python script will automatically detect it and output virtual Xbox controller movements instead of keyboard presses!
-How does that look? Should be everything they need to get it running from scratch!
+The server will start and broadcast your PC's connection info for your iPhone to discover.
+
+> ⚠️ **First run:** Windows Firewall may prompt for network access. Click **Allow** so your phone can connect.
+
+**Step 5: Install virtual gamepad drivers *(highly recommended for VR)***
+
+Same as above — install [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases) for analog joystick output instead of keyboard simulation.
+
+---
+
+## 📱 Using the App
+
+1. Connect both your PC and iPhone to the **same Wi-Fi network**
+2. Launch `PocketRunnerServer.exe` (or `windows_companion.py`) on your PC and leave it running
+3. Open the **Pocket Runner** app on your iPhone
+4. Your PC's name will appear automatically — tap it to connect
+5. Put your phone in your pocket (or strap it to your leg or waist)
+6. **Jog in place** to move forward in your game!
+
+---
+
+## 📋 Requirements
+
+- Windows PC
+- iPhone with the Pocket Runner app installed
+- Both devices on the same local Wi-Fi network
+- *(Optional but recommended)* [ViGEmBus](https://github.com/nefarius/ViGEmBus/releases) for analog controller support
